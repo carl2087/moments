@@ -42,7 +42,8 @@ export const ProfileDataProvider = ({children}) => {
 
     const handleUnfollow = async (clickedProfile) => {
         try {
-            await axiosRes.delete(`/followers/${clickedProfile.following_id}/`);
+            await axiosRes.delete(`/followers/${clickedProfile.following_id}`);
+
             setProfileData((prevState) => ({
                 ...prevState,
                 pageProfile: {
@@ -50,11 +51,12 @@ export const ProfileDataProvider = ({children}) => {
                 },
                 popularProfiles: {
                     ...prevState.popularProfiles,
-                    results: prevState.popularProfiles.results.map((profile) => unfollowHelper(profile, clickedProfile))
-                }
+                    results: prevState.popularProfiles.results.map((profile) => unfollowHelper(profile, clickedProfile)),
+                },
             }))
         } catch (err) {
             console.log(err)
+            console.log(clickedProfile)
         }
     }
 
