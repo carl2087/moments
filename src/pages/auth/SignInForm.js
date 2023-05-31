@@ -13,6 +13,7 @@ import appStyles from "../../App.module.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function SignInForm() {
 
@@ -20,6 +21,7 @@ function SignInForm() {
     // so that we can show different icons in the  NavBar depending on the users logged in state.
 
     const setCurrentUser = useSetCurrentUser();
+    useRedirect('loggedIn')
 
     const [signInData, setSignInData] = useState({
         username: "",
@@ -44,7 +46,7 @@ function SignInForm() {
         try {
             const {data} = await axios.post('/dj-rest-auth/login/', signInData);
             setCurrentUser(data.user)
-            history.push('/');
+            history.goBack();
         } catch (err) {
             setErrors(err.response?.data)
         }
