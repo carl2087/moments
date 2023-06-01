@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 // defines the base url which is the API url from heroku
 axios.defaults.baseURL = 'https://drf-api-carl.herokuapp.com/';
