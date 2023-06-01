@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -20,15 +20,16 @@ import { ProfileDataProvider } from './contexts/ProfileDataContext';
 
 //the code below ensures react router renders the content you want
 
-ReactDOM.render(
-		<Router>
-			<CurrentUserProvider>
-				<ProfileDataProvider>
-					<App />
-				</ProfileDataProvider>
-			</CurrentUserProvider>
-		</Router>,
-	document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+	<Router>
+		<CurrentUserProvider>
+		<ProfileDataProvider>
+			<App />
+		</ProfileDataProvider>
+		</CurrentUserProvider>
+	</Router>,
 );
 
 // If you want to start measuring performance in your app, pass a function
