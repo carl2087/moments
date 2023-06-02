@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
@@ -21,6 +22,7 @@ function PostsPage({ message, filter = "" }) {
     const [hasLoaded, setHasLoaded] = useState(false);
     const { pathName } = useLocation();
     const [query, setQuery] = useState("");
+    const currentUser = useCurrentUser();
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -29,7 +31,7 @@ function PostsPage({ message, filter = "" }) {
                 setPosts(data)
                 setHasLoaded(true)
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         }
         setHasLoaded(false);
@@ -39,7 +41,7 @@ function PostsPage({ message, filter = "" }) {
         return () => {
             clearTimeout(timer)
         }
-    }, [filter, query, pathName])
+    }, [filter, query, pathName, currentUser])
 
     return (
     <Row className="h-100">
